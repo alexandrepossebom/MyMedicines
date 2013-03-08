@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    
+    <item
+        android:id="@+id/menu_barcode"
+        android:icon="@drawable/ic_action_barcode"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/action_barcode"/>
+    
+    <item
+        android:id="@+id/menu_save"
+        android:icon="@drawable/ic_action_save"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/save"/>
+
+</menu>

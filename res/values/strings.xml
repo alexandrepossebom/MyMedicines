@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">My Pharmacy</string>
+    <string name="title_medicine_detail">Medicine Detail</string>
+    <string name="validity">Validity</string>
+    <string name="separator">/</string>
+    <string name="drug">Drug</string>
+    <string name="name">Name</string>
+    <string name="laboratory">Laboratory</string>
+    <string name="barcode">Barcode</string>
+    <string name="hint_medicine_name">Enter the Medicine Name</string>
+    <string name="add_medicine">Add Medicine</string>
+    <string name="save">Save medicine</string>
+    <string name="action_barcode">Read Barcode</string>
+    <string name="form">Form</string>
+    <string name="hint_form">Pill</string>
+    <string name="concentration">Concentration</string>
+
+    <string-array name="forms_array">
+        <item>Oral</item>
+        <item>Pill</item>
+        <item>Tablet</item>
+        <item>Capsule</item>
+        <item>Thin film</item>
+        <item>Liquid solution</item>
+        <item>Suspension</item>
+        <item>Seed</item>
+        <item>Aerosol</item>
+        <item>Inhaler</item>
+        <item>Nebulizer</item>
+        <item>Intradermal</item>
+        <item>Intramuscular</item>
+        <item>Intraosseous</item>
+        <item>Intraperitoneal</item>
+        <item>Intravenous</item>
+        <item>Subcutaneous</item>
+        <item>Intrathecal</item>
+        <item>Cream</item>
+        <item>Gel</item>
+        <item>Liniment</item>
+        <item>Balm</item>
+        <item>Lotion</item>
+        <item>Ointment</item>
+        <item>Ear drops</item>
+        <item>Eye drops</item>
+        <item>Skin patch</item>
+        <item>Suppository</item>
+    </string-array>
+
+</resources>
