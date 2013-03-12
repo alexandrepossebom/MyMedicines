@@ -9,7 +9,22 @@ public class Medicine {
 	private String form;
 	private int month;
 	private int year;
+	private String barcode;
+	private String country;
 	
+	
+	public String getBarcode() {
+		return barcode;
+	}
+	public void setBarcode(String barcode) {
+		this.barcode = barcode;
+	}
+	public String getCountry() {
+		return country;
+	}
+	public void setCountry(String country) {
+		this.country = country;
+	}
 	public int getMonth() {
 		return month;
 	}

@@ -1,9 +1,7 @@
 package com.possebom.mypharmacy;
 
-import com.possebom.mypharmacy.dao.MedicineDao;
-import com.possebom.mypharmacy.model.Medicine;
-
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,8 +11,12 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 
-public class MedicineAddActivity extends Activity{
+import com.possebom.mypharmacy.GetMedicine.GetMedicineListener;
+import com.possebom.mypharmacy.model.Medicine;
+import com.possebom.mypharmacy.util.Utils;
 
+public class MedicineAddActivity extends Activity implements GetMedicineListener {
+	
 	private AutoCompleteTextView autoCompleteTextViewForm;
 	private EditText	editTextBarcode;
 	private EditText	editTextName;
@@ -23,6 +25,7 @@ public class MedicineAddActivity extends Activity{
 	private EditText	editTextLaboratory;
 	private EditText	editTextMonth;
 	private EditText	editTextYear;
+	private ProgressDialog progressDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +39,9 @@ public class MedicineAddActivity extends Activity{
 		editTextLaboratory = (EditText) findViewById(R.id.editTextLaboratory);
 		editTextMonth = (EditText) findViewById(R.id.editTextMonth);
 		editTextYear = (EditText) findViewById(R.id.editTextYear);
-
+		
+		progressDialog = new ProgressDialog(this);
+		
 		//AutoComplete
 		autoCompleteTextViewForm = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextViewForm);
 		String[] forms = getResources().getStringArray(R.array.forms_array);
@@ -50,6 +55,8 @@ public class MedicineAddActivity extends Activity{
 			if (resultCode == RESULT_OK) {
 				String contents = data.getStringExtra("SCAN_RESULT");
 				editTextBarcode.setText(contents);
+				progressDialog.setMessage(getString(R.string.finding));
+				new GetMedicine(progressDialog,this,contents,getResources().getConfiguration().locale.getCountry()).execute();
 			}
 		}
 	}
@@ -73,29 +80,35 @@ public class MedicineAddActivity extends Activity{
 			}
 			return true;
 		case R.id.menu_save :
-			MedicineDao md = new MedicineDao(getApplicationContext());
-			Medicine medicine = new Medicine();
-			medicine.setBrandName(editTextName.getText().toString());
-			medicine.setDrug(editTextDrug.getText().toString());
-			medicine.setConcentration(editTextConcentration.getText().toString());
-			medicine.setForm(autoCompleteTextViewForm.getText().toString());
-			medicine.setLaboratory(editTextLaboratory.getText().toString());
-			try {
-				medicine.setYear(Integer.parseInt(editTextYear.getText().toString()));
-			} catch (Exception e) {
-				medicine.setYear(0);
-			}
-			try{
-				medicine.setMonth(Integer.parseInt(editTextMonth.getText().toString()));
-			}catch (Exception e) {
-				medicine.setMonth(0);
-			}
-			md.insert(medicine);
-			finish();
+			progressDialog.setMessage(getString(R.string.saving));
+			new SendMedicine(getApplicationContext(),progressDialog,fillMedicine()).execute();
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
+	}
+
+	private Medicine fillMedicine(){
+		Medicine medicine = new Medicine();
+		medicine.setBrandName(editTextName.getText().toString());
+		medicine.setDrug(editTextDrug.getText().toString());
+		medicine.setConcentration(editTextConcentration.getText().toString());
+		medicine.setForm(autoCompleteTextViewForm.getText().toString());
+		medicine.setLaboratory(editTextLaboratory.getText().toString());
+		medicine.setYear(Utils.parseInt(editTextYear.getText().toString(),0));
+		medicine.setMonth(Utils.parseInt(editTextMonth.getText().toString(),0));
+		medicine.setBarcode(editTextBarcode.getText().toString());
+		medicine.setCountry(getResources().getConfiguration().locale.getCountry()); 
+		return medicine;
+	}
+
+	@Override
+	public void onRemoteCallComplete(Medicine medicine) {
+		editTextName.setText(medicine.getBrandName());
+		editTextDrug.setText(medicine.getDrug());
+		editTextConcentration.setText(medicine.getConcentration());
+		editTextLaboratory.setText(medicine.getLaboratory());
+		autoCompleteTextViewForm.setText(medicine.getForm());
 	}
 
 }

@@ -16,6 +16,8 @@
     <string name="form">Form</string>
     <string name="hint_form">Pill</string>
     <string name="concentration">Concentration</string>
+    <string name="saving">Saving new medicine....</string>
+    <string name="finding">Finding medicine....</string>
 
     <string-array name="forms_array">
         <item>Oral</item>
