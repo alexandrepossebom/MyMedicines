@@ -1,5 +1,7 @@
 package com.possebom.mypharmacy.model;
 
+import java.util.Calendar;
+
 public class Medicine {
 	private int id;
 	private String brandName;
@@ -72,6 +74,14 @@ public class Medicine {
 	}
 	public void setForm(String form) {
 		this.form = form;
+	}
+	
+	public Calendar getValidity(){
+		final Calendar date = Calendar.getInstance();
+        date.set(Calendar.YEAR, getYear());
+        date.set(Calendar.MONTH, getMonth());
+        date.set(Calendar.DAY_OF_MONTH, 1);
+		return date;
 	}
 	
 	@Override

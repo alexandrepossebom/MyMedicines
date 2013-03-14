@@ -18,6 +18,11 @@
     <string name="concentration">Concentration</string>
     <string name="saving">Saving new medicine....</string>
     <string name="finding">Finding medicine....</string>
+    <string name="title_alert_barcodescanner">Barcode Scanner</string>
+    <string name="body_alert_barcodescanner">You don\'t have any barcode scanner. Do you want to install it now ?</string>
+    <string name="alert_title_medicine">Medicine are incomplete</string>
+    <string name="alert_body_medicine">You need to fill at last : Brand Name, Validity Month and Year</string>
+    <string name="image_list_description">Medicine Image</string>
 
     <string-array name="forms_array">
         <item>Oral</item>

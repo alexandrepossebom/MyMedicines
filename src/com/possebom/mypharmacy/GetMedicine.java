@@ -1,20 +1,19 @@
 package com.possebom.mypharmacy;
 
-import java.io.BufferedInputStream;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-import org.apache.http.util.ByteArrayBuffer;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.BasicResponseHandler;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.possebom.mypharmacy.model.Medicine;
-
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
+
+import com.possebom.mypharmacy.model.Medicine;
 
 public class GetMedicine extends AsyncTask<Void, Void, Void> {
 	private static final String	TAG	= "MEDICINE";
@@ -62,23 +61,14 @@ public class GetMedicine extends AsyncTask<Void, Void, Void> {
 
 	@Override
 	protected Void doInBackground(Void... arg0) {
-		HttpURLConnection urlConnection = null;
+		HttpClient httpclient = new DefaultHttpClient();
+		ResponseHandler<String> handler = new BasicResponseHandler();
+		HttpGet request = new HttpGet("http://possebom.com/android/mypharmacy/getMedicine.php?country="+country+"&barcode="+barcode);
 		try {
-			URL url = new URL("http://possebom.com/android/mypharmacy/getMedicine.php?country="+country+"&barcode="+barcode);
-			urlConnection = (HttpURLConnection) url.openConnection();
-			InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-			BufferedInputStream bufferedInput = new BufferedInputStream(in);
-			ByteArrayBuffer byteArray = new ByteArrayBuffer(50);
-			int current = 0;
-			while((current = bufferedInput.read()) != -1){
-				byteArray.append((byte)current);
-			}				
-			String result = new String(byteArray.toByteArray(),"UTF-8");
+			String result = new String(httpclient.execute(request, handler).getBytes("ISO-8859-1"),"UTF-8");
 			JSONArray jsonArray = new JSONArray(result);
-
 			json = jsonArray.getJSONObject(0);
-
-			urlConnection.disconnect();
+			httpclient.getConnectionManager().shutdown();
 		} catch (Exception e) {
 			json = null;
 			Log.e(TAG, "Error converting result " + e.toString());

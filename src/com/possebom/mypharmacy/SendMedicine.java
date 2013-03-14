@@ -28,11 +28,13 @@ public class SendMedicine extends AsyncTask<Void, Void, Void> {
 	private Medicine medicine;
 	private Context context;
 	private ProgressDialog progressDialog;
+	private SetMedicineListener listener;
 
-	public SendMedicine(Context context, ProgressDialog progressDialog, Medicine medicine) {
+	public SendMedicine(Context context, SetMedicineListener listener, ProgressDialog progressDialog, Medicine medicine) {
 		this.medicine = medicine;
 		this.context = context;
 		this.progressDialog = progressDialog;
+		this.listener = listener;
 	}
 
 	@Override
@@ -47,6 +49,7 @@ public class SendMedicine extends AsyncTask<Void, Void, Void> {
 		if (progressDialog.isShowing()) {
 			progressDialog.dismiss();
 		}
+		listener.onSaveCallComplete();
 	}
 
 	@Override
@@ -82,4 +85,7 @@ public class SendMedicine extends AsyncTask<Void, Void, Void> {
 		}
 	}
 
+	public interface SetMedicineListener {
+        public void onSaveCallComplete();
+    }
 }

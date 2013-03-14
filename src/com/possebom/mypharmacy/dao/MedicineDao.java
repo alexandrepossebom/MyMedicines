@@ -92,7 +92,7 @@ public class MedicineDao {
 		List<Medicine> list = new ArrayList<Medicine>();
 		String[] columns = new String[]{"_id", "brandName", "drug", "laboratory", "concentration", "form", "month", "year"};
 		db = dbHelper.getWritableDatabase();
-		Cursor c = db.query(TABLE, columns,null, null, null, null,"brandName desc");
+		Cursor c = db.query(TABLE, columns,null, null, null, null,"brandName");
 		c.moveToFirst();
 		while(!c.isAfterLast()){
 			Medicine message = fillMedicine(c);

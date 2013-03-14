@@ -2,15 +2,13 @@ package com.possebom.mypharmacy;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.actionbarsherlock.app.SherlockListFragment;
 import com.possebom.mypharmacy.dao.MedicineDao;
-import com.possebom.mypharmacy.model.Medicine;
 
-public class MedicineListFragment extends ListFragment {
+public class MedicineListFragment extends SherlockListFragment {
 
 	private static final String	STATE_ACTIVATED_POSITION	= "activated_position";
 
@@ -42,7 +40,11 @@ public class MedicineListFragment extends ListFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		setListAdapter(new ArrayAdapter<Medicine>(getActivity(), android.R.layout.simple_list_item_activated_1,android.R.id.text1, md.getAll()));
+		setListAdapter(new ListAdapter(getActivity(), R.layout.list_medicine_adapter, md.getAll()));
+		
+//		setListAdapter(new MyBaseAdapter(getActivity().getApplicationContext(),md.getAll()));
+		
+//		setListAdapter(new ArrayAdapter<Medicine>(getActivity(), android.R.layout.simple_list_item_activated_1,android.R.id.text1, md.getAll()));
 	}
 
 	@Override
@@ -76,6 +78,7 @@ public class MedicineListFragment extends ListFragment {
 	public void onListItemClick(ListView listView, View view, int position, long id) {
 		super.onListItemClick(listView, view, position, id);
 		mCallbacks.onItemSelected(md.getAll().get(position).getId());
+//		view.setSelected(true);
 	}
 
 	@Override
