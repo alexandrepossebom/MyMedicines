@@ -30,11 +30,14 @@ public class MedicineDetailFragment extends SherlockFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_medicine_detail, container, false);
-
 		if (medicine != null) {
 			((TextView) rootView.findViewById(R.id.medicine_detail_brandName)).setText(medicine.getBrandName());
+			((TextView) rootView.findViewById(R.id.medicine_detail_drug)).setText(medicine.getDrug());
+			((TextView) rootView.findViewById(R.id.medicine_detail_validity)).setText(medicine.getValidity());
+			((TextView) rootView.findViewById(R.id.medicine_detail_laboratory)).setText(medicine.getLaboratory());
+			((TextView) rootView.findViewById(R.id.medicine_detail_form)).setText(medicine.getForm());
+			((TextView) rootView.findViewById(R.id.medicine_detail_concentration)).setText(medicine.getConcentration());
 		}
-
 		return rootView;
 	}
 }

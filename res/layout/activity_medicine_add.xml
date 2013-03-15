@@ -69,8 +69,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:maxLength="4"
             android:inputType="number"
+            android:maxLength="4"
             android:singleLine="true" />
     </TableRow>
 
@@ -87,7 +87,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:ems="10" />
+            android:ems="10"
+            android:inputType="textCapWords" />
     </TableRow>
 
     <TableRow>
@@ -96,7 +97,8 @@
             android:id="@+id/textView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/form" />
+            android:hint="@string/form"
+            android:textIsSelectable="true" />
 
         <AutoCompleteTextView
             android:id="@+id/autoCompleteTextViewForm"
@@ -120,7 +122,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:ems="10" />
+            android:ems="10"
+            android:inputType="text" />
     </TableRow>
 
     <TableRow>
@@ -137,7 +140,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:enabled="false" />
+            android:enabled="false"
+            android:inputType="number" />
     </TableRow>
 
 </TableLayout>

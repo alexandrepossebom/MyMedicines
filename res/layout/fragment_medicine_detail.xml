@@ -1,12 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
     <TextView
+        android:id="@+id/textViewBrandName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/name"
+        android:textColor="@color/abs__primary_text_holo_light"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <TextView
+        android:id="@+id/medicine_detail_brandName"
         android:layout_width="match_parent"
-         android:id="@+id/medicine_detail_brandName"
-        android:layout_alignParentTop="true"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_height="wrap_content"></TextView>
-</RelativeLayout>
+        android:textIsSelectable="true" />
+
+    <TextView
+        android:id="@+id/textViewValidity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/validity"
+        android:textColor="@color/abs__primary_text_holo_light"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <TextView
+        android:id="@+id/medicine_detail_validity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textIsSelectable="true" />
+
+    <TextView
+        android:id="@+id/textViewDrug"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/drug"
+        android:textColor="@color/abs__primary_text_holo_light"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <TextView
+        android:id="@+id/medicine_detail_drug"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textIsSelectable="true" />
+    
+    <TextView
+        android:id="@+id/textViewLaboratory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/laboratory"
+        android:textColor="@color/abs__primary_text_holo_light"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <TextView
+        android:id="@+id/medicine_detail_laboratory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textIsSelectable="true" />
+    
+    <TextView
+        android:id="@+id/textViewForm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/form"
+        android:textColor="@color/abs__primary_text_holo_light"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <TextView
+        android:id="@+id/medicine_detail_form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textIsSelectable="true" />
+    
+     <TextView
+        android:id="@+id/textViewConcentration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/concentration"
+        android:textColor="@color/abs__primary_text_holo_light"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <TextView
+        android:id="@+id/medicine_detail_concentration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textIsSelectable="true" />
+
+</LinearLayout>

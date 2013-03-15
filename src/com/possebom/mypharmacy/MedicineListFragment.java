@@ -3,10 +3,13 @@ package com.possebom.mypharmacy;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.possebom.mypharmacy.dao.MedicineDao;
+import com.possebom.mypharmacy.model.Medicine;
 
 public class MedicineListFragment extends SherlockListFragment {
 
@@ -41,10 +44,7 @@ public class MedicineListFragment extends SherlockListFragment {
 	public void onResume() {
 		super.onResume();
 		setListAdapter(new ListAdapter(getActivity(), R.layout.list_medicine_adapter, md.getAll()));
-		
-//		setListAdapter(new MyBaseAdapter(getActivity().getApplicationContext(),md.getAll()));
-		
-//		setListAdapter(new ArrayAdapter<Medicine>(getActivity(), android.R.layout.simple_list_item_activated_1,android.R.id.text1, md.getAll()));
+		getListView().setOnItemLongClickListener(listener);
 	}
 
 	@Override
@@ -78,7 +78,6 @@ public class MedicineListFragment extends SherlockListFragment {
 	public void onListItemClick(ListView listView, View view, int position, long id) {
 		super.onListItemClick(listView, view, position, id);
 		mCallbacks.onItemSelected(md.getAll().get(position).getId());
-//		view.setSelected(true);
 	}
 
 	@Override
@@ -99,7 +98,16 @@ public class MedicineListFragment extends SherlockListFragment {
 		} else {
 			getListView().setItemChecked(position, true);
 		}
-
 		mActivatedPosition = position;
 	}
+	
+	private OnItemLongClickListener listener = new OnItemLongClickListener() {
+		@Override
+		public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int position, long id) {
+			Medicine medicine = md.getAll().get(position);
+			md.deleteById(medicine.getId());
+			onResume();
+			return true;
+		}
+	};
 }

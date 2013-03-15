@@ -1,9 +1,7 @@
 package com.possebom.mypharmacy;
 
 
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Locale;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,9 +14,9 @@ import android.widget.TextView;
 import com.possebom.mypharmacy.model.Medicine;
 
 public class ListAdapter extends ArrayAdapter<Medicine> {
-	Context context;
-	List<Medicine> list;
-	int textViewResourceId;
+	private Context context;
+	private List<Medicine> list;
+	private int textViewResourceId;
 
 	public ListAdapter(Context context, int textViewResourceId, List<Medicine> list) {
 		super(context, textViewResourceId, list);
@@ -34,15 +32,11 @@ public class ListAdapter extends ArrayAdapter<Medicine> {
 
 		Medicine medicine = list.get(position);
 
-		TextView textViewBrandName = (TextView) view.findViewById(R.id.name);
-		TextView textViewValidity = (TextView) view.findViewById(R.id.validity);
+		TextView textViewBrandName = (TextView) view.findViewById(R.id.list_adapter_brand_name);
+		TextView textViewValidity = (TextView) view.findViewById(R.id.list_adapter_validity);
 		
 		textViewBrandName.setText(medicine.getBrandName());
-		
-		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/yyyy", Locale.ENGLISH);
-		String validity = dateFormat.format(medicine.getValidity().getTime());
-		
-		textViewValidity.setText(validity);
+		textViewValidity.setText(medicine.getValidity());
 
 		return view;
 	}

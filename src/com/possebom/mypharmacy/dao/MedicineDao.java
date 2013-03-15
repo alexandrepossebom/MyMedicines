@@ -104,4 +104,10 @@ public class MedicineDao {
 		return list;
 	}
 
+	public int deleteById(int id){
+		db = dbHelper.getWritableDatabase();
+		int rows = db.delete(TABLE, "_id = ?", new String[]{ String.valueOf(id) });
+		db.close();
+		return rows;
+	}
 }

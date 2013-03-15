@@ -1,6 +1,8 @@
 package com.possebom.mypharmacy.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class Medicine {
 	private int id;
@@ -76,12 +78,16 @@ public class Medicine {
 		this.form = form;
 	}
 	
-	public Calendar getValidity(){
+	public String getValidity(){
 		final Calendar date = Calendar.getInstance();
         date.set(Calendar.YEAR, getYear());
-        date.set(Calendar.MONTH, getMonth());
+        date.set(Calendar.MONTH, getMonth()-1);
         date.set(Calendar.DAY_OF_MONTH, 1);
-		return date;
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/yyyy", Locale.ENGLISH);
+		String validity = dateFormat.format(date.getTime());
+        
+		return validity;
 	}
 	
 	@Override
