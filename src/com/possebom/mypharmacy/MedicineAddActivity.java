@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -38,6 +39,10 @@ public class MedicineAddActivity extends Activity implements GetMedicineListener
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_medicine_add);
+
+
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+
 		editTextBarcode = (EditText) findViewById(R.id.editTextBarcode);
 
 		editTextName = (EditText) findViewById(R.id.editTextName);
@@ -78,6 +83,9 @@ public class MedicineAddActivity extends Activity implements GetMedicineListener
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
+		case android.R.id.home:
+			NavUtils.navigateUpTo(this, new Intent(this, MedicineListActivity.class));
+			return true;
 		case R.id.menu_barcode:
 			getBarcode();
 			return true;
@@ -155,7 +163,7 @@ public class MedicineAddActivity extends Activity implements GetMedicineListener
 			return false;
 		return true;
 	}
-	
+
 	private void showAlertMedicineIsIncomplete(){
 		new AlertDialog.Builder(this)
 		.setTitle(R.string.alert_title_medicine)
