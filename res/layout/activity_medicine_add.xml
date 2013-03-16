@@ -16,6 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:inputType="textCapWords"
             android:hint="@string/hint_medicine_name" >
 
             <requestFocus />
@@ -36,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="date" />
+            android:inputType="textMultiLine" />
     </TableRow>
 
     <TableRow>

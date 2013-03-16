@@ -47,13 +47,13 @@ public class GetMedicine extends AsyncTask<Void, Void, Void> {
 			medicine.setConcentration(json.getString("concentration"));
 			medicine.setForm(json.getString("form"));
 			medicine.setLaboratory(json.getString("laboratory"));
-		} catch (JSONException e) {
+		} catch (Exception e) {
 			Log.e(TAG, "Error on json : " + e.toString());
 		}
 
 		listener.onRemoteCallComplete(medicine);
 		
-		if (progressDialog.isShowing()) {
+		if (progressDialog != null && progressDialog.isShowing()) {
 			progressDialog.dismiss();
 		}
 
