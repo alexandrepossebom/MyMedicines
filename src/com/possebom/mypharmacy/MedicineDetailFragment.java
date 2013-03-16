@@ -1,16 +1,16 @@
 package com.possebom.mypharmacy;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockFragment;
 import com.possebom.mypharmacy.dao.MedicineDao;
 import com.possebom.mypharmacy.model.Medicine;
 
-public class MedicineDetailFragment extends SherlockFragment {
+public class MedicineDetailFragment extends Fragment {
 	public static final String		ARG_ITEM_ID	= "item_id";
 	private Medicine medicine;
 

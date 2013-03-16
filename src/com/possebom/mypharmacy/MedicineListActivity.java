@@ -2,11 +2,13 @@ package com.possebom.mypharmacy;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 
-
-public class MedicineListActivity extends SherlockFragmentActivity implements MedicineListFragment.Callbacks {
+public class MedicineListActivity extends FragmentActivity implements MedicineListFragment.Callbacks {
 
 	private boolean	mTwoPane;
 
@@ -37,13 +39,14 @@ public class MedicineListActivity extends SherlockFragmentActivity implements Me
 	}
 	
 	@Override
-	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
-		getSupportMenuInflater().inflate(R.menu.main, menu);
-		return true;
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.main, menu);
+	    return true;
 	}
 	
 	@Override
-	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) {
 		 switch (item.getItemId()) {
 	        case R.id.menu_add :
 	            Intent intent = new Intent(this, MedicineAddActivity.class);

@@ -2,16 +2,16 @@ package com.possebom.mypharmacy;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 
-import com.actionbarsherlock.app.SherlockListFragment;
 import com.possebom.mypharmacy.dao.MedicineDao;
 import com.possebom.mypharmacy.model.Medicine;
 
-public class MedicineListFragment extends SherlockListFragment {
+public class MedicineListFragment extends ListFragment {
 
 	private static final String	STATE_ACTIVATED_POSITION	= "activated_position";
 
