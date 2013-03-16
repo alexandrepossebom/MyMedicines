@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Meus Medicamentos</string>
+    <string name="title_medicine_detail">Detalhes do Medicamento</string>
+    <string name="validity">Validade</string>
+    <string name="separator">/</string>
+    <string name="drug">Droga</string>
+    <string name="name">Nome</string>
+    <string name="laboratory">Laboratório</string>
+    <string name="barcode">Código de barras</string>
+    <string name="hint_medicine_name">Entre com o nome do medicamento</string>
+    <string name="add_medicine">Adicionar medicamento</string>
+    <string name="save">Salvar medicamento</string>
+    <string name="action_barcode">Ler código de barras</string>
+    <string name="form">Forma</string>
+    <string name="hint_form">Pírula</string>
+    <string name="concentration">Concentração</string>
+    <string name="saving">Salvando novo medicamento....</string>
+    <string name="finding">Procurando medicamento....</string>
+    <string name="title_alert_barcodescanner">Leitor de Código de Barras</string>
+    <string name="body_alert_barcodescanner">Você não tem nenhum leitor de código de barras. Você deseja instalar um agora?</string>
+    <string name="alert_title_medicine">Medicamento está incompleto</string>
+    <string name="alert_body_medicine">Você precisa preencher ao menos: Nome e Validade</string>
+    <string name="image_list_description">Imagem do medicamento</string>
+
+    <string-array name="forms_array">
+        <item>Oral</item>
+        <item>Pírula</item>
+        <item>Tablete</item>
+        <item>Capsula</item>
+        <item>Filme fino</item>
+        <item>Solução liquida</item>
+        <item>Suspensão</item>
+        <item>Semente</item>
+        <item>Aerosol</item>
+        <item>Inalavél</item>
+        <item>Nebulizador</item>
+        <item>Intradérmica</item>
+        <item>Intramuscular</item>
+        <item>Intraosseo</item>
+        <item>Intraperitoneal</item>
+        <item>Intravenoso</item>
+        <item>Subcutâneo</item>
+        <item>Intratecal</item>
+        <item>Creme</item>
+        <item>Gel</item>
+        <item>Linimento</item>
+        <item>Bálsamo</item>
+        <item>Loção</item>
+        <item>Pomada</item>
+        <item>Gotas para ouvido</item>
+        <item>Colírio</item>
+        <item>Adesivo para pele</item>
+        <item>Supositório</item>
+    </string-array>
+
+</resources>
