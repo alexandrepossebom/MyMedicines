@@ -9,7 +9,7 @@
     <string name="name">Name</string>
     <string name="laboratory">Laboratory</string>
     <string name="barcode">Barcode</string>
-    <string name="hint_medicine_name">Enter the Medicine Name</string>
+    <string name="hint_medicine_name">Medicine Name</string>
     <string name="add_medicine">Add Medicine</string>
     <string name="save">Save medicine</string>
     <string name="action_barcode">Read Barcode</string>

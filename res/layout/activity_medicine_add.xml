@@ -16,11 +16,45 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="textCapWords"
-            android:hint="@string/hint_medicine_name" >
+            android:hint="@string/hint_medicine_name"
+            android:inputType="textCapWords" >
 
             <requestFocus />
         </EditText>
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/validity" />
+
+        <DatePicker
+            android:id="@+id/datePickerValidity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:calendarViewShown="false" />
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/form" />
+
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteTextViewForm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/hint_form" />
     </TableRow>
 
     <TableRow>
@@ -43,41 +77,6 @@
     <TableRow>
 
         <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/validity" />
-
-        <EditText
-            android:id="@+id/editTextMonth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="number"
-            android:maxLength="2"
-            android:singleLine="true" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/separator" />
-
-        <EditText
-            android:id="@+id/editTextYear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="number"
-            android:maxLength="4"
-            android:singleLine="true" />
-    </TableRow>
-
-    <TableRow>
-
-        <TextView
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -90,24 +89,6 @@
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textCapWords" />
-    </TableRow>
-
-    <TableRow>
-
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/form"
-            android:textIsSelectable="true" />
-
-        <AutoCompleteTextView
-            android:id="@+id/autoCompleteTextViewForm"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="@string/hint_form" />
     </TableRow>
 
     <TableRow>
@@ -128,19 +109,13 @@
     </TableRow>
 
     <TableRow>
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/barcode" />
-
         <EditText
             android:id="@+id/editTextBarcode"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:visibility="invisible"
             android:enabled="false"
             android:inputType="number" />
     </TableRow>

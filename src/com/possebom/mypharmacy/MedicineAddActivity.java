@@ -1,5 +1,7 @@
 package com.possebom.mypharmacy;
 
+import java.lang.reflect.Field;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -12,14 +14,15 @@ import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.possebom.mypharmacy.GetMedicine.GetMedicineListener;
 import com.possebom.mypharmacy.SendMedicine.SetMedicineListener;
 import com.possebom.mypharmacy.model.Medicine;
-import com.possebom.mypharmacy.util.Utils;
 
 public class MedicineAddActivity extends Activity implements GetMedicineListener,SetMedicineListener {
 
@@ -31,9 +34,8 @@ public class MedicineAddActivity extends Activity implements GetMedicineListener
 	private EditText	editTextDrug;
 	private EditText	editTextConcentration;
 	private EditText	editTextLaboratory;
-	private EditText	editTextMonth;
-	private EditText	editTextYear;
 	private ProgressDialog progressDialog;
+	private DatePicker datePickerValidity;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +51,11 @@ public class MedicineAddActivity extends Activity implements GetMedicineListener
 		editTextDrug = (EditText) findViewById(R.id.editTextDrug);
 		editTextConcentration = (EditText) findViewById(R.id.editTextConcentration);
 		editTextLaboratory = (EditText) findViewById(R.id.editTextLaboratory);
-		editTextMonth = (EditText) findViewById(R.id.editTextMonth);
-		editTextYear = (EditText) findViewById(R.id.editTextYear);
+		datePickerValidity = (DatePicker) findViewById(R.id.datePickerValidity);
+		
+		datePickerValidity.setMinDate(System.currentTimeMillis() - 1000);
+		
+		findAndHideField(datePickerValidity, "mDaySpinner");
 
 		progressDialog = new ProgressDialog(this);
 
@@ -109,8 +114,8 @@ public class MedicineAddActivity extends Activity implements GetMedicineListener
 		medicine.setConcentration(editTextConcentration.getText().toString());
 		medicine.setForm(autoCompleteTextViewForm.getText().toString());
 		medicine.setLaboratory(editTextLaboratory.getText().toString());
-		medicine.setYear(Utils.parseInt(editTextYear.getText().toString(),0));
-		medicine.setMonth(Utils.parseInt(editTextMonth.getText().toString(),0));
+		medicine.setYear(datePickerValidity.getYear());
+		medicine.setMonth(datePickerValidity.getMonth());
 		medicine.setBarcode(editTextBarcode.getText().toString());
 		medicine.setCountry(getResources().getConfiguration().locale.getCountry()); 
 		return medicine;
@@ -170,6 +175,18 @@ public class MedicineAddActivity extends Activity implements GetMedicineListener
 		.setMessage(R.string.alert_body_medicine)
 		.setIcon(android.R.drawable.ic_dialog_alert)
 		.setNeutralButton(android.R.string.ok, null).show();
+	}
+	
+	//Code from http://stackoverflow.com/a/10796558
+	private void findAndHideField(DatePicker datepicker, String name) {
+	    try {
+	        Field field = DatePicker.class.getDeclaredField(name);
+	        field.setAccessible(true);
+	        View fieldInstance = (View) field.get(datepicker);
+	        fieldInstance.setVisibility(View.GONE);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
 	}
 
 }

@@ -81,7 +81,7 @@ public class Medicine {
 	public String getValidity(){
 		final Calendar date = Calendar.getInstance();
         date.set(Calendar.YEAR, getYear());
-        date.set(Calendar.MONTH, getMonth()-1);
+        date.set(Calendar.MONTH, getMonth());
         date.set(Calendar.DAY_OF_MONTH, 1);
         
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/yyyy", Locale.ENGLISH);
