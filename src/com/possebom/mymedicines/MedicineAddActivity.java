@@ -1,4 +1,4 @@
-package com.possebom.mypharmacy;
+package com.possebom.mymedicines;
 
 import java.lang.reflect.Field;
 
@@ -20,9 +20,10 @@ import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
-import com.possebom.mypharmacy.GetMedicine.GetMedicineListener;
-import com.possebom.mypharmacy.SendMedicine.SetMedicineListener;
-import com.possebom.mypharmacy.model.Medicine;
+import com.possebom.mymedicines.GetMedicine.GetMedicineListener;
+import com.possebom.mymedicines.SendMedicine.SetMedicineListener;
+import com.possebom.mymedicines.model.Medicine;
+import com.possebom.mymedicines.R;
 
 public class MedicineAddActivity extends Activity implements GetMedicineListener,SetMedicineListener {
 

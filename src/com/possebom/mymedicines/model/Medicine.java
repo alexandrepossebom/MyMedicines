@@ -1,4 +1,4 @@
-package com.possebom.mypharmacy.model;
+package com.possebom.mymedicines.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

@@ -1,4 +1,4 @@
-package com.possebom.mypharmacy.dao;
+package com.possebom.mymedicines.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.possebom.mypharmacy.model.Medicine;
+import com.possebom.mymedicines.model.Medicine;
 
 public class MedicineDao {
 	private SQLiteDatabase db;
@@ -28,7 +28,7 @@ public class MedicineDao {
 					"year integer);";
 
 	public MedicineDao(Context ctx) {
-		dbHelper = new SQLiteHelper(ctx,TABLE, 3,SCRIPT_DB_CREATE, SCRIPT_DB_DELETE);
+		dbHelper = new SQLiteHelper(ctx,TABLE, 1,SCRIPT_DB_CREATE, SCRIPT_DB_DELETE);
 	}
 
 	public void insert(Medicine m){

@@ -1,4 +1,4 @@
-package com.possebom.mypharmacy;
+package com.possebom.mymedicines;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
@@ -6,14 +6,13 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.possebom.mypharmacy.model.Medicine;
+import com.possebom.mymedicines.model.Medicine;
 
 public class GetMedicine extends AsyncTask<Void, Void, Void> {
 	private static final String	TAG	= "MEDICINE";
@@ -64,7 +63,7 @@ public class GetMedicine extends AsyncTask<Void, Void, Void> {
 	protected Void doInBackground(Void... arg0) {
 		HttpClient httpclient = new DefaultHttpClient();
 		ResponseHandler<String> handler = new BasicResponseHandler();
-		HttpGet request = new HttpGet("http://possebom.com/android/mypharmacy/getMedicine.php?country="+country+"&barcode="+barcode);
+		HttpGet request = new HttpGet("http://possebom.com/android/mymedicines/getMedicine.php?country="+country+"&barcode="+barcode);
 		try {
 			String result = new String(httpclient.execute(request, handler).getBytes("ISO-8859-1"),"UTF-8");
 			JSONArray jsonArray = new JSONArray(result);

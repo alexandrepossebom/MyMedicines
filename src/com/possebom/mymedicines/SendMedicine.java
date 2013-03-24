@@ -1,4 +1,4 @@
-package com.possebom.mypharmacy;
+package com.possebom.mymedicines;
 
 
 import java.io.IOException;
@@ -14,8 +14,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
-import com.possebom.mypharmacy.dao.MedicineDao;
-import com.possebom.mypharmacy.model.Medicine;
+import com.possebom.mymedicines.dao.MedicineDao;
+import com.possebom.mymedicines.model.Medicine;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -65,7 +65,7 @@ public class SendMedicine extends AsyncTask<Void, Void, Void> {
 
 	private void sendData(Medicine medicine){
 		HttpClient httpclient = new DefaultHttpClient();
-		HttpPost httppost = new HttpPost("http://possebom.com/android/mypharmacy/addMedicine.php");
+		HttpPost httppost = new HttpPost("http://possebom.com/android/mymedicines/addMedicine.php");
 		try {
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
 			nameValuePairs.add(new BasicNameValuePair("brandName", medicine.getBrandName()));

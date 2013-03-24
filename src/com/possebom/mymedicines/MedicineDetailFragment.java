@@ -1,4 +1,4 @@
-package com.possebom.mypharmacy;
+package com.possebom.mymedicines;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,8 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.possebom.mypharmacy.dao.MedicineDao;
-import com.possebom.mypharmacy.model.Medicine;
+import com.possebom.mymedicines.dao.MedicineDao;
+import com.possebom.mymedicines.model.Medicine;
+import com.possebom.mymedicines.R;
 
 public class MedicineDetailFragment extends Fragment {
 	public static final String		ARG_ITEM_ID	= "item_id";

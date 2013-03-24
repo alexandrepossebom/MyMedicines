@@ -1,4 +1,4 @@
-package com.possebom.mypharmacy;
+package com.possebom.mymedicines;
 
 
 import java.util.List;
@@ -11,7 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.possebom.mypharmacy.model.Medicine;
+import com.possebom.mymedicines.model.Medicine;
+import com.possebom.mymedicines.R;
 
 public class ListAdapter extends ArrayAdapter<Medicine> {
 	private Context context;

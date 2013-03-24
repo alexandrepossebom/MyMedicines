@@ -1,4 +1,4 @@
-package com.possebom.mypharmacy;
+package com.possebom.mymedicines;
 
 import java.util.List;
 
@@ -11,8 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.mobeta.android.dslv.DragSortListView;
-import com.possebom.mypharmacy.dao.MedicineDao;
-import com.possebom.mypharmacy.model.Medicine;
+import com.possebom.mymedicines.dao.MedicineDao;
+import com.possebom.mymedicines.model.Medicine;
+import com.possebom.mymedicines.R;
 
 public class MedicineListFragment extends ListFragment {
 	

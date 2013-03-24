@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">My Pharmacy</string>
+    <string name="app_name">My Medicines</string>
     <string name="title_medicine_detail">Medicine Detail</string>
     <string name="validity">Validity</string>
     <string name="separator">/</string>

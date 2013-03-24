@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/medicine_list"
-        android:name="com.possebom.mypharmacy.MedicineListFragment"
+        android:name="com.possebom.mymedicines.MedicineListFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"

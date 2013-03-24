@@ -1,4 +1,6 @@
-package com.possebom.mypharmacy;
+package com.possebom.mymedicines;
+
+import com.possebom.mymedicines.R;
 
 import android.content.Intent;
 import android.os.Bundle;

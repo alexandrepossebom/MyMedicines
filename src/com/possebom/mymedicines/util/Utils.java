@@ -1,4 +1,4 @@
-package com.possebom.mypharmacy.util;
+package com.possebom.mymedicines.util;
 
 public class Utils {
 

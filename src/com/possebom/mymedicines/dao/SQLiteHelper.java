@@ -1,4 +1,4 @@
-package com.possebom.mypharmacy.dao;
+package com.possebom.mymedicines.dao;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
