@@ -1,18 +1,21 @@
 package com.possebom.mypharmacy;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemLongClickListener;
+import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.mobeta.android.dslv.DragSortListView;
 import com.possebom.mypharmacy.dao.MedicineDao;
 import com.possebom.mypharmacy.model.Medicine;
 
 public class MedicineListFragment extends ListFragment {
-
+	
 	private static final String	STATE_ACTIVATED_POSITION	= "activated_position";
 
 	private Callbacks			mCallbacks					= sDummyCallbacks;
@@ -30,6 +33,9 @@ public class MedicineListFragment extends ListFragment {
 
 
 	private MedicineDao md;
+	private List<Medicine> list;
+
+	private ListAdapter	adapter;
 
 	public MedicineListFragment() {
 	}
@@ -38,13 +44,33 @@ public class MedicineListFragment extends ListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		md = new MedicineDao(getActivity().getApplicationContext());
+		list = md.getAll();
+		adapter = new ListAdapter(getActivity(), R.layout.list_medicine_adapter, list);
+		setListAdapter(adapter);
 	}
+	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		DragSortListView mDslv = (DragSortListView) inflater.inflate(R.layout.list_root, container, false);
+        mDslv.setRemoveListener(onRemove);
+        return mDslv;
+	}
+	
+	private DragSortListView.RemoveListener onRemove = new DragSortListView.RemoveListener() {
+		@Override
+		public void remove(int which) {
+			Medicine m = list.get(which);
+			adapter.remove(m);
+			md.deleteById(m.getId());
+		}
+	};
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		setListAdapter(new ListAdapter(getActivity(), R.layout.list_medicine_adapter, md.getAll()));
-		getListView().setOnItemLongClickListener(listener);
+		adapter.clear();
+		list = md.getAll();
+		adapter.addAll(list);
 	}
 
 	@Override
@@ -77,7 +103,7 @@ public class MedicineListFragment extends ListFragment {
 	@Override
 	public void onListItemClick(ListView listView, View view, int position, long id) {
 		super.onListItemClick(listView, view, position, id);
-		mCallbacks.onItemSelected(md.getAll().get(position).getId());
+		mCallbacks.onItemSelected(list.get(position).getId());
 	}
 
 	@Override
@@ -101,13 +127,4 @@ public class MedicineListFragment extends ListFragment {
 		mActivatedPosition = position;
 	}
 	
-	private OnItemLongClickListener listener = new OnItemLongClickListener() {
-		@Override
-		public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int position, long id) {
-			Medicine medicine = md.getAll().get(position);
-			md.deleteById(medicine.getId());
-			onResume();
-			return true;
-		}
-	};
 }

@@ -29,7 +29,7 @@ public class GetMedicine extends AsyncTask<Void, Void, Void> {
 		this.listener = listener;
 		this.progressDialog = progressDialog;
 	}
-	
+
 	@Override
 	protected void onPreExecute() {
 		super.onPreExecute();
@@ -40,7 +40,7 @@ public class GetMedicine extends AsyncTask<Void, Void, Void> {
 	protected void onPostExecute(Void result) {
 		super.onPostExecute(result);
 		Medicine medicine = new Medicine();
-		
+
 		try {
 			medicine.setBrandName(json.getString("brandName"));
 			medicine.setDrug(json.getString("drug"));
@@ -52,10 +52,11 @@ public class GetMedicine extends AsyncTask<Void, Void, Void> {
 		}
 
 		listener.onRemoteCallComplete(medicine);
-		
-		if (progressDialog != null && progressDialog.isShowing()) {
-			progressDialog.dismiss();
-		}
+
+		if(progressDialog != null)
+			if (progressDialog.isShowing()) {
+				progressDialog.dismiss();
+			}
 
 	}
 
@@ -75,9 +76,9 @@ public class GetMedicine extends AsyncTask<Void, Void, Void> {
 		}
 		return null;
 	}
-	
+
 	public interface GetMedicineListener {
-        public void onRemoteCallComplete(Medicine medicine);
-    }
+		public void onRemoteCallComplete(Medicine medicine);
+	}
 
 }

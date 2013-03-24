@@ -2,12 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="?android:attr/activatedBackgroundIndicator"
     android:gravity="left|center"
+    android:orientation="horizontal"
     android:paddingBottom="5dp"
     android:paddingLeft="5dp"
-    android:paddingTop="5dp"
-    android:background="?android:attr/activatedBackgroundIndicator"
-    android:orientation="horizontal" >
+    android:paddingTop="5dp" >
 
     <ImageView
         android:id="@+id/imageView1"
@@ -33,8 +33,8 @@
             android:id="@+id/list_adapter_validity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/holo_red_light"
             android:singleLine="true"
+            android:textColor="@android:color/holo_red_light"
             android:textIsSelectable="false" />
     </LinearLayout>
 

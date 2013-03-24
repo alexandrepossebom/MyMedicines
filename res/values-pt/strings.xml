@@ -14,7 +14,7 @@
     <string name="save">Salvar medicamento</string>
     <string name="action_barcode">Ler código de barras</string>
     <string name="form">Forma</string>
-    <string name="hint_form">Pírula</string>
+    <string name="hint_form">Comprimido</string>
     <string name="concentration">Concentração</string>
     <string name="saving">Salvando novo medicamento....</string>
     <string name="finding">Procurando medicamento....</string>
@@ -26,7 +26,7 @@
 
     <string-array name="forms_array">
         <item>Oral</item>
-        <item>Pírula</item>
+        <item>Comprimidos</item>
         <item>Tablete</item>
         <item>Capsula</item>
         <item>Filme fino</item>
