@@ -58,8 +58,6 @@ public class MedicineAddActivity extends Activity implements GetMedicineListener
 		editTextLaboratory = (EditText) findViewById(R.id.editTextLaboratory);
 		datePickerValidity = (DatePicker) findViewById(R.id.datePickerValidity);
 
-		datePickerValidity.setMinDate(System.currentTimeMillis() - 1000);
-
 		findAndHideField(datePickerValidity, "mDaySpinner");
 
 		//AutoComplete
@@ -178,8 +176,18 @@ public class MedicineAddActivity extends Activity implements GetMedicineListener
 
 	private boolean isMedicineOk(){
 		Medicine medicine = fillMedicine();
-		if(medicine.getBrandName().trim().length() == 0 || medicine.getMonth() == 0 || medicine.getYear() == 0)
+		if(medicine.getBrandName().trim().length() == 0)
 			return false;
+
+		Calendar calNow = Calendar.getInstance();
+		Calendar calValidity = Calendar.getInstance();
+
+		calValidity.set(Calendar.YEAR, medicine.getYear());
+		calValidity.set(Calendar.MONTH, medicine.getMonth());
+		
+		if(calValidity.before(calNow))
+			return false;
+		
 		return true;
 	}
 
