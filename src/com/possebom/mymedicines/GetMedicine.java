@@ -8,7 +8,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -17,23 +16,16 @@ import com.possebom.mymedicines.model.Medicine;
 public class GetMedicine extends AsyncTask<Void, Void, Void> {
 	private static final String	TAG	= "MEDICINE";
 	private String barcode;
-	private ProgressDialog progressDialog;
 	private JSONObject json;
 	private String country;
 	private GetMedicineListener listener;
 
-	public GetMedicine(ProgressDialog progressDialog,GetMedicineListener listener, String barcode, String country) {
+	public GetMedicine(GetMedicineListener listener, String barcode, String country) {
 		this.barcode = barcode;
 		this.country = country;
 		this.listener = listener;
-		this.progressDialog = progressDialog;
 	}
 
-	@Override
-	protected void onPreExecute() {
-		super.onPreExecute();
-		progressDialog.show();
-	}
 
 	@Override
 	protected void onPostExecute(Void result) {
@@ -51,12 +43,6 @@ public class GetMedicine extends AsyncTask<Void, Void, Void> {
 		}
 
 		listener.onRemoteCallComplete(medicine);
-
-		if(progressDialog != null)
-			if (progressDialog.isShowing()) {
-				progressDialog.dismiss();
-			}
-
 	}
 
 	@Override

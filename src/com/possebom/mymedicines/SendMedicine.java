@@ -14,41 +14,29 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
-import com.possebom.mymedicines.dao.MedicineDao;
-import com.possebom.mymedicines.model.Medicine;
-
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+
+import com.possebom.mymedicines.dao.MedicineDao;
+import com.possebom.mymedicines.model.Medicine;
 
 
 public class SendMedicine extends AsyncTask<Void, Void, Void> {
 	private static final String	TAG	= "MEDICINE";
 	private Medicine medicine;
 	private Context context;
-	private ProgressDialog progressDialog;
 	private SetMedicineListener listener;
 
-	public SendMedicine(Context context, SetMedicineListener listener, ProgressDialog progressDialog, Medicine medicine) {
+	public SendMedicine(Context context, SetMedicineListener listener, Medicine medicine) {
 		this.medicine = medicine;
 		this.context = context;
-		this.progressDialog = progressDialog;
 		this.listener = listener;
-	}
-
-	@Override
-	protected void onPreExecute() {
-		super.onPreExecute();
-		progressDialog.show();
 	}
 
 	@Override
 	protected void onPostExecute(Void result) {
 		super.onPostExecute(result);
-		if (progressDialog.isShowing()) {
-			progressDialog.dismiss();
-		}
 		listener.onSaveCallComplete();
 	}
 
