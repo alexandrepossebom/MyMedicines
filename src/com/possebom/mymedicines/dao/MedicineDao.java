@@ -41,11 +41,7 @@ public class MedicineDao {
 		cv.put("year", m.getYear());
 		cv.put("form", m.getForm());
 		db = dbHelper.getWritableDatabase();
-		try{
-			db.insertOrThrow(TABLE, null, cv);
-		}catch (Exception e) {
-			Log.d("MEDICINE","Erro inserindo mensagem : "+ e.getLocalizedMessage());
-		}
+		db.insert(TABLE, null, cv);
 		db.close();
 	}
 
@@ -59,19 +55,6 @@ public class MedicineDao {
 		medicine.setForm(c.getString(c.getColumnIndex("form")));
 		medicine.setMonth(c.getInt(c.getColumnIndex("month")));
 		medicine.setYear(c.getInt(c.getColumnIndex("year")));
-		return medicine;
-	}
-
-	public Medicine getMessageById(int id){
-		String[] columns = new String[]{"_id", "brandName", "drug", "laboratory", "concentration", "form", "month", "year"};
-		String[] args = new String[]{String.valueOf(id)};
-		db = dbHelper.getWritableDatabase();
-		Cursor c = db.query(TABLE, columns, "_id = ?", args, null, null, null);
-		Medicine medicine = null;
-		if(c.moveToFirst())
-			medicine = fillMedicine(c);
-		c.close();
-		db.close();
 		return medicine;
 	}
 

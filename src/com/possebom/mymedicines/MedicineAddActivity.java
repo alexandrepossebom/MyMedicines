@@ -47,7 +47,6 @@ public class MedicineAddActivity extends Activity implements GetMedicineListener
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_medicine_add);
 
-
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		editTextBarcode = (EditText) findViewById(R.id.editTextBarcode);
@@ -98,7 +97,7 @@ public class MedicineAddActivity extends Activity implements GetMedicineListener
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			NavUtils.navigateUpTo(this, new Intent(this, MedicineListActivity.class));
+//			NavUtils.navigateUpTo(this, new Intent(this, MedicineListActivity.class));
 			finish();
 			return true;
 		case R.id.menu_barcode:
