@@ -1,15 +1,13 @@
 package com.possebom.mymedicines;
 
-import com.possebom.mymedicines.R;
-import com.possebom.mymedicines.dao.MedicineDao;
-
-import android.R.menu;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import com.possebom.mymedicines.dao.MedicineDao;
 
 
 public class MedicineListActivity extends FragmentActivity implements MedicineListFragment.Callbacks {
@@ -67,7 +65,7 @@ public class MedicineListActivity extends FragmentActivity implements MedicineLi
 	        	MedicineDao md = new MedicineDao(getApplicationContext());
 	        	md.deleteById(id);
 	        	((MedicineListFragment) getSupportFragmentManager().findFragmentById(R.id.medicine_list)).onResume();
-	        	onItemSelected(-1);
+	        	onItemSelected(0);
 	        	if (menu != null) {
 					menu.findItem(R.id.menu_delete).setVisible(false);
 				}

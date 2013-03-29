@@ -11,6 +11,7 @@
     <string name="barcode">Código de barras</string>
     <string name="hint_medicine_name">Nome do medicamento</string>
     <string name="add_medicine">Adicionar medicamento</string>
+    <string name="del_medicine">Removee medicamento</string>
     <string name="save">Salvar medicamento</string>
     <string name="action_barcode">Ler código de barras</string>
     <string name="form">Forma</string>
