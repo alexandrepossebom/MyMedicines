@@ -1,7 +1,9 @@
 package com.possebom.mymedicines;
 
 import com.possebom.mymedicines.R;
+import com.possebom.mymedicines.dao.MedicineDao;
 
+import android.R.menu;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -13,6 +15,8 @@ import android.view.MenuItem;
 public class MedicineListActivity extends FragmentActivity implements MedicineListFragment.Callbacks {
 
 	private boolean	mTwoPane;
+	private Menu	menu;
+	private int	id;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +31,16 @@ public class MedicineListActivity extends FragmentActivity implements MedicineLi
 
 	@Override
 	public void onItemSelected(int id) {
+		this.id = id;
 		if (mTwoPane) {
 			Bundle arguments = new Bundle();
 			arguments.putInt(MedicineDetailFragment.ARG_ITEM_ID, id);
 			MedicineDetailFragment fragment = new MedicineDetailFragment();
 			fragment.setArguments(arguments);
 			getSupportFragmentManager().beginTransaction().replace(R.id.medicine_detail_container, fragment).commit();
+			if (menu != null) {
+				menu.findItem(R.id.menu_delete).setVisible(true);
+			}
 		} else {
 			Intent detailIntent = new Intent(this, MedicineDetailActivity.class);
 			detailIntent.putExtra(MedicineDetailFragment.ARG_ITEM_ID, id);
@@ -42,6 +50,7 @@ public class MedicineListActivity extends FragmentActivity implements MedicineLi
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+		this.menu = menu;
 	    MenuInflater inflater = getMenuInflater();
 	    inflater.inflate(R.menu.main, menu);
 	    return true;
@@ -54,6 +63,14 @@ public class MedicineListActivity extends FragmentActivity implements MedicineLi
 	            Intent intent = new Intent(this, MedicineAddActivity.class);
 	            startActivity(intent);
 	            return true;
+	        case R.id.menu_delete:
+	        	MedicineDao md = new MedicineDao(getApplicationContext());
+	        	md.deleteById(id);
+	        	((MedicineListFragment) getSupportFragmentManager().findFragmentById(R.id.medicine_list)).onResume();
+	        	onItemSelected(-1);
+	        	if (menu != null) {
+					menu.findItem(R.id.menu_delete).setVisible(false);
+				}
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }

@@ -3,8 +3,15 @@
 
     <item
         android:id="@+id/menu_add"
-        android:icon="@drawable/ic_action_add"
+        android:icon="@android:drawable/ic_menu_add"
         android:showAsAction="ifRoom|withText"
         android:title="@string/add_medicine"/>
+    
+    <item
+        android:id="@+id/menu_delete"
+        android:icon="@android:drawable/ic_menu_delete"
+        android:showAsAction="ifRoom|withText"
+        android:visible="false"
+        android:title="@string/del_medicine"/>
 
 </menu>
