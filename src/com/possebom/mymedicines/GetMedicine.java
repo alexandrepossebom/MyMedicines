@@ -31,17 +31,21 @@ public class GetMedicine extends AsyncTask<Void, Void, Void> {
 	protected void onPostExecute(Void result) {
 		super.onPostExecute(result);
 		Medicine medicine = new Medicine();
-
-		try {
-			medicine.setBrandName(json.getString("brandName"));
-			medicine.setDrug(json.getString("drug"));
-			medicine.setConcentration(json.getString("concentration"));
-			medicine.setForm(json.getString("form"));
-			medicine.setLaboratory(json.getString("laboratory"));
-		} catch (Exception e) {
-			Log.e(TAG, "Error on json : " + e.toString());
+		
+		if(json != null){
+			try {
+				medicine.setBrandName(json.getString("brandName"));
+				medicine.setDrug(json.getString("drug"));
+				medicine.setConcentration(json.getString("concentration"));
+				medicine.setForm(json.getString("form"));
+				medicine.setLaboratory(json.getString("laboratory"));
+				medicine.setBarcode(barcode);
+				medicine.setCountry(country);
+			} catch (Exception e) {
+				Log.e(TAG, "Error on json : " + e.toString());
+			}
 		}
-
+		
 		listener.onRemoteCallComplete(medicine);
 	}
 
