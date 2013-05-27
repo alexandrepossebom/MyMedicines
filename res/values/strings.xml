@@ -19,6 +19,8 @@
     <string name="concentration">Concentration</string>
     <string name="saving">Saving new medicine....</string>
     <string name="finding">Finding medicine....</string>
+    <string name="notfoundindb">Not found in database</string>
+    <string name="foundindb">Found in database</string>
     <string name="title_alert_barcodescanner">Barcode Scanner</string>
     <string name="body_alert_barcodescanner">You don\'t have any barcode scanner. Do you want to install it now ?</string>
     <string name="alert_title_medicine">Medicine are incomplete</string>

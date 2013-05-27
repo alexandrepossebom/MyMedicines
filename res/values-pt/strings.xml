@@ -19,6 +19,8 @@
     <string name="concentration">Concentração</string>
     <string name="saving">Salvando novo medicamento....</string>
     <string name="finding">Procurando medicamento....</string>
+    <string name="notfoundindb">Não encontrado no banco de dados</string>
+    <string name="foundindb">Encontrado no banco de dados</string>
     <string name="title_alert_barcodescanner">Leitor de Código de Barras</string>
     <string name="body_alert_barcodescanner">Você não tem nenhum leitor de código de barras. Você deseja instalar um agora?</string>
     <string name="alert_title_medicine">Medicamento está incompleto</string>

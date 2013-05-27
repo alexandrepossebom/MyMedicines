@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.renderscript.Font;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,6 +25,8 @@ import android.widget.EditText;
 import com.possebom.mymedicines.GetMedicine.GetMedicineListener;
 import com.possebom.mymedicines.SendMedicine.SetMedicineListener;
 import com.possebom.mymedicines.model.Medicine;
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 
 public class MedicineAddActivity extends Activity implements GetMedicineListener,SetMedicineListener {
 
@@ -46,7 +49,8 @@ public class MedicineAddActivity extends Activity implements GetMedicineListener
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_medicine_add);
 
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getActionBar() != null)
+		    getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		editTextBarcode = (EditText) findViewById(R.id.editTextBarcode);
 
@@ -77,7 +81,10 @@ public class MedicineAddActivity extends Activity implements GetMedicineListener
 		if (requestCode == 0 && resultCode == RESULT_OK) {
 			String barcode = data.getStringExtra("SCAN_RESULT");
 			editTextBarcode.setText(barcode);
-			String country = getResources().getConfiguration().locale.getCountry();
+
+            String country = "";
+            if(getResources() == null && getResources().getConfiguration() != null)
+                country = getResources().getConfiguration().locale.getCountry();
 			showLoadingView();
 			new GetMedicine(this,barcode,country).execute();
 		}else{
@@ -132,6 +139,10 @@ public class MedicineAddActivity extends Activity implements GetMedicineListener
 
 	@Override
 	public void onRemoteCallComplete(Medicine medicine) {
+        if(medicine.getBrandName() == null)
+            Crouton.makeText(this,R.string.notfoundindb, Style.INFO).show();
+        else
+            Crouton.makeText(this,R.string.foundindb, Style.INFO).show();
 		editTextName.setText(medicine.getBrandName());
 		editTextDrug.setText(medicine.getDrug());
 		editTextConcentration.setText(medicine.getConcentration());
@@ -185,16 +196,19 @@ public class MedicineAddActivity extends Activity implements GetMedicineListener
 		
 		if(calValidity.before(calNow))
 			return false;
-		
-		return true;
+		else
+		    return true;
 	}
 
 	private void showAlertMedicineIsIncomplete(){
+        Crouton.makeText(this,R.string.alert_body_medicine, Style.ALERT).show();
+		/*
 		new AlertDialog.Builder(this)
 		.setTitle(R.string.alert_title_medicine)
 		.setMessage(R.string.alert_body_medicine)
 		.setIcon(android.R.drawable.ic_dialog_alert)
 		.setNeutralButton(android.R.string.ok, null).show();
+		*/
 	}
 
 	//Code from http://stackoverflow.com/a/10796558
