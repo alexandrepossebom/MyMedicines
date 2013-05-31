@@ -26,6 +26,8 @@
     <string name="alert_title_medicine">Medicine are incomplete</string>
     <string name="alert_body_medicine">You need to fill at last Brand Name and Validity Date</string>
     <string name="image_list_description">Medicine Image</string>
+    <string name="item_added">Item Added Successfully</string>
+    <string name="item_not_added">Item not added</string>
 
     <string-array name="forms_array">
         <item>Oral</item>

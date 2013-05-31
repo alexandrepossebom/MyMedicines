@@ -31,7 +31,6 @@ public class GetMedicine extends AsyncTask<Void, Void, Void> {
 	protected void onPostExecute(Void result) {
 		super.onPostExecute(result);
 		Medicine medicine = new Medicine();
-		
 		if(json != null){
 			try {
 				medicine.setBrandName(json.getString("brandName"));

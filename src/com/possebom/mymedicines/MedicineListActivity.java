@@ -3,16 +3,21 @@ package com.possebom.mymedicines;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.possebom.mymedicines.dao.MedicineDao;
 
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
+
 
 public class MedicineListActivity extends FragmentActivity implements MedicineListFragment.Callbacks {
 
-	private boolean	mTwoPane;
+    public static final String TAG = "MEDICINE";
+    private boolean	mTwoPane;
 	private Menu	menu;
 	private int	id;
 
@@ -53,18 +58,34 @@ public class MedicineListActivity extends FragmentActivity implements MedicineLi
 	    inflater.inflate(R.menu.main, menu);
 	    return true;
 	}
-	
-	@Override
+
+
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if(resultCode == RESULT_OK)
+//            Crouton.makeText(this,R.string.item_added, Style.INFO).show();
+//        else
+//            Crouton.makeText(this,R.string.item_not_added, Style.CONFIRM).show();
+//    }
+//
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        Crouton.cancelAllCroutons();
+//    }
+
+    @Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		 switch (item.getItemId()) {
 	        case R.id.menu_add :
 	            Intent intent = new Intent(this, MedicineAddActivity.class);
-	            startActivity(intent);
+	            startActivityForResult(intent, 0);
 	            return true;
 	        case R.id.menu_delete:
 	        	MedicineDao md = new MedicineDao(getApplicationContext());
 	        	md.deleteById(id);
-	        	((MedicineListFragment) getSupportFragmentManager().findFragmentById(R.id.medicine_list)).onResume();
+	        	getSupportFragmentManager().findFragmentById(R.id.medicine_list).onResume();
 	        	onItemSelected(0);
 	        	if (menu != null) {
 					menu.findItem(R.id.menu_delete).setVisible(false);

@@ -3,8 +3,10 @@ package com.possebom.mymedicines;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,117 +17,121 @@ import com.possebom.mymedicines.dao.MedicineDao;
 import com.possebom.mymedicines.model.Medicine;
 import com.possebom.mymedicines.R;
 
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
+
 public class MedicineListFragment extends ListFragment {
-	
-	private static final String	STATE_ACTIVATED_POSITION	= "activated_position";
 
-	private Callbacks			mCallbacks					= sDummyCallbacks;
-	private int					mActivatedPosition			= ListView.INVALID_POSITION;
+    private static final String	STATE_ACTIVATED_POSITION	= "activated_position";
 
-	public interface Callbacks {
-		public void onItemSelected(int id);
-	}
+    private Callbacks			mCallbacks					= sDummyCallbacks;
+    private int					mActivatedPosition			= ListView.INVALID_POSITION;
 
-	private static Callbacks	sDummyCallbacks	= new Callbacks() {
-		@Override
-		public void onItemSelected(int id) {
-		}
-	};
+    public interface Callbacks {
+        public void onItemSelected(int id);
+    }
+
+    private static Callbacks	sDummyCallbacks	= new Callbacks() {
+        @Override
+        public void onItemSelected(int id) {
+        }
+    };
 
 
-	private MedicineDao md;
-	private List<Medicine> list;
+    private MedicineDao md;
+    private List<Medicine> list;
 
-	private ListAdapter	adapter;
+    private ListAdapter	adapter;
 
-	public MedicineListFragment() {
-	}
+    public MedicineListFragment() {
+    }
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		md = new MedicineDao(getActivity().getApplicationContext());
-		list = md.getAll();
-		adapter = new ListAdapter(getActivity(), R.layout.list_medicine_adapter, list);
-		setListAdapter(adapter);
-	}
-	
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		DragSortListView mDslv = (DragSortListView) inflater.inflate(R.layout.list_root, container, false);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        md = new MedicineDao(getActivity().getApplicationContext());
+        list = md.getAll();
+        adapter = new ListAdapter(getActivity(), R.layout.list_medicine_adapter, list);
+        setListAdapter(adapter);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        DragSortListView mDslv = (DragSortListView) inflater.inflate(R.layout.list_root, container, false);
         mDslv.setRemoveListener(onRemove);
         return mDslv;
-	}
-	
-	private DragSortListView.RemoveListener onRemove = new DragSortListView.RemoveListener() {
-		@Override
-		public void remove(int which) {
-			Medicine m = list.get(which);
-			adapter.remove(m);
-			md.deleteById(m.getId());
-		}
-	};
+    }
 
-	@Override
-	public void onResume() {
-		super.onResume();
-		adapter.clear();
-		list = md.getAll();
-		adapter.addAll(list);
-	}
+    private DragSortListView.RemoveListener onRemove = new DragSortListView.RemoveListener() {
+        @Override
+        public void remove(int which) {
+            Medicine m = list.get(which);
+            adapter.remove(m);
+            md.deleteById(m.getId());
+            list.remove(m);
+        }
+    };
 
-	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapter.clear();
+        list = md.getAll();
+        adapter.addAll(list);
+    }
 
-		if (savedInstanceState != null && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
-			setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
-		}
-	}
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
+        if (savedInstanceState != null && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
+            setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
+        }
+    }
 
-		if (!(activity instanceof Callbacks)) {
-			throw new IllegalStateException("Activity must implement fragment's callbacks.");
-		}
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
 
-		mCallbacks = (Callbacks) activity;
-	}
+        if (!(activity instanceof Callbacks)) {
+            throw new IllegalStateException("Activity must implement fragment's callbacks.");
+        }
 
-	@Override
-	public void onDetach() {
-		super.onDetach();
+        mCallbacks = (Callbacks) activity;
+    }
 
-		mCallbacks = sDummyCallbacks;
-	}
+    @Override
+    public void onDetach() {
+        super.onDetach();
 
-	@Override
-	public void onListItemClick(ListView listView, View view, int position, long id) {
-		super.onListItemClick(listView, view, position, id);
-		mCallbacks.onItemSelected(list.get(position).getId());
-	}
+        mCallbacks = sDummyCallbacks;
+    }
 
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		if (mActivatedPosition != ListView.INVALID_POSITION) {
-			outState.putInt(STATE_ACTIVATED_POSITION, mActivatedPosition);
-		}
-	}
+    @Override
+    public void onListItemClick(ListView listView, View view, int position, long id) {
+        super.onListItemClick(listView, view, position, id);
+        mCallbacks.onItemSelected(list.get(position).getId());
+    }
 
-	public void setActivateOnItemClick(boolean activateOnItemClick) {
-		getListView().setChoiceMode(activateOnItemClick ? ListView.CHOICE_MODE_SINGLE : ListView.CHOICE_MODE_NONE);
-	}
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (mActivatedPosition != ListView.INVALID_POSITION) {
+            outState.putInt(STATE_ACTIVATED_POSITION, mActivatedPosition);
+        }
+    }
 
-	private void setActivatedPosition(int position) {
-		if (position == ListView.INVALID_POSITION) {
-			getListView().setItemChecked(mActivatedPosition, false);
-		} else {
-			getListView().setItemChecked(position, true);
-		}
-		mActivatedPosition = position;
-	}
-	
+    public void setActivateOnItemClick(boolean activateOnItemClick) {
+        getListView().setChoiceMode(activateOnItemClick ? ListView.CHOICE_MODE_SINGLE : ListView.CHOICE_MODE_NONE);
+    }
+
+    private void setActivatedPosition(int position) {
+        if (position == ListView.INVALID_POSITION) {
+            getListView().setItemChecked(mActivatedPosition, false);
+        } else {
+            getListView().setItemChecked(position, true);
+        }
+        mActivatedPosition = position;
+    }
+
 }

@@ -101,6 +101,7 @@ public class MedicineAddActivity extends Activity implements GetMedicineListener
 		switch (item.getItemId()) {
 		case android.R.id.home:
 //			NavUtils.navigateUpTo(this, new Intent(this, MedicineListActivity.class));
+            setResult(RESULT_CANCELED,new Intent());
 			finish();
 			return true;
 		case R.id.menu_barcode:
@@ -150,6 +151,7 @@ public class MedicineAddActivity extends Activity implements GetMedicineListener
 
 	@Override
 	public void onSaveCallComplete() {
+        setResult(RESULT_OK,new Intent());
 		finish();
 	}
 

@@ -26,6 +26,8 @@
     <string name="alert_title_medicine">Medicamento está incompleto</string>
     <string name="alert_body_medicine">Você precisa preencher ao menos Nome e Data de Validade</string>
     <string name="image_list_description">Imagem do medicamento</string>
+    <string name="item_added">Item Added Successfully</string>
+    <string name="item_not_added">Item not added</string>
 
     <string-array name="forms_array">
         <item>Oral</item>
