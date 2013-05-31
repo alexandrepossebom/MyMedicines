@@ -81,10 +81,7 @@ public class MedicineAddActivity extends Activity implements GetMedicineListener
 		if (requestCode == 0 && resultCode == RESULT_OK) {
 			String barcode = data.getStringExtra("SCAN_RESULT");
 			editTextBarcode.setText(barcode);
-
-            String country = "";
-            if(getResources() == null && getResources().getConfiguration() != null)
-                country = getResources().getConfiguration().locale.getCountry();
+            String country = getResources().getConfiguration().locale.getCountry();
 			showLoadingView();
 			new GetMedicine(this,barcode,country).execute();
 		}else{
@@ -142,7 +139,7 @@ public class MedicineAddActivity extends Activity implements GetMedicineListener
         if(medicine.getBrandName() == null)
             Crouton.makeText(this,R.string.notfoundindb, Style.INFO).show();
         else
-            Crouton.makeText(this,R.string.foundindb, Style.INFO).show();
+            Crouton.makeText(this,R.string.foundindb, Style.CONFIRM).show();
 		editTextName.setText(medicine.getBrandName());
 		editTextDrug.setText(medicine.getDrug());
 		editTextConcentration.setText(medicine.getConcentration());
@@ -233,8 +230,13 @@ public class MedicineAddActivity extends Activity implements GetMedicineListener
 		mContentView.setVisibility(View.GONE);
 	}
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Crouton.cancelAllCroutons();
+    }
 
-	private void crossfade() {
+    private void crossfade() {
 
 		// Set the content view to 0% opacity but visible, so that it is visible
 		// (but fully transparent) during the animation.

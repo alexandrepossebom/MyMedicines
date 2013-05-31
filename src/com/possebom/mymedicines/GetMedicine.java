@@ -54,14 +54,16 @@ public class GetMedicine extends AsyncTask<Void, Void, Void> {
 		HttpClient httpclient = new DefaultHttpClient();
 		ResponseHandler<String> handler = new BasicResponseHandler();
 		HttpGet request = new HttpGet("http://possebom.com/android/mymedicines/getMedicine.php?country="+country+"&barcode="+barcode);
+        String result = null;
 		try {
-			String result = new String(httpclient.execute(request, handler).getBytes("ISO-8859-1"),"UTF-8");
+			result = new String(httpclient.execute(request, handler).getBytes("ISO-8859-1"),"UTF-8");
 			JSONArray jsonArray = new JSONArray(result);
 			json = jsonArray.getJSONObject(0);
 			httpclient.getConnectionManager().shutdown();
 		} catch (Exception e) {
 			json = null;
-			Log.e(TAG, "Error converting result " + e.toString());
+            Log.e(TAG, "Request URL : " + request.getURI().toString());
+			Log.e(TAG, "Error converting result " + e.toString() + " JSON : " + result);
 		}
 		return null;
 	}
