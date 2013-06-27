@@ -1,12 +1,24 @@
 package com.possebom.mymedicines.util;
 
-public class Utils {
 
-	public static Integer parseInt(String text,int value) {
+public abstract class Utils {
+
+	private static final boolean	DEBUG	= true;
+	private static final String	TAG	= "MEDICINE";
+
+	public static Integer parseInt(final String text,final int value) {
+		int number = 0;
 		try {
-			return Integer.parseInt(text);
+			number = Integer.parseInt(text);
 		} catch (NumberFormatException e) {
-			return value;
+			number = value;
+		}
+		return number;
+	}
+	
+	public static void log(final String message) {
+		if (DEBUG) {
+			android.util.Log.d(TAG, message);
 		}
 	}
 

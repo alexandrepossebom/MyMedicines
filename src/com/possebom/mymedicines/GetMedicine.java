@@ -26,7 +26,6 @@ public class GetMedicine extends AsyncTask<Void, Void, Void> {
 		this.listener = listener;
 	}
 
-
 	@Override
 	protected void onPostExecute(Void result) {
 		super.onPostExecute(result);

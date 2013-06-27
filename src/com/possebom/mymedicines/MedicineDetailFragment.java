@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.possebom.mymedicines.dao.MedicineDao;
 import com.possebom.mymedicines.model.Medicine;
-import com.possebom.mymedicines.R;
 
 public class MedicineDetailFragment extends Fragment {
 	public static final String		ARG_ITEM_ID	= "item_id";
@@ -22,9 +21,8 @@ public class MedicineDetailFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		if (getArguments().containsKey(ARG_ITEM_ID)) {
-			MedicineDao md = new MedicineDao(getActivity().getApplicationContext());
-			int id = getArguments().getInt(ARG_ITEM_ID);
-			medicine = md.getMedicineById(id);
+			long id = getArguments().getLong(ARG_ITEM_ID);
+			medicine = MedicineDao.getInstance(getActivity()).getMedicineById(id);
 		}
 	}
 

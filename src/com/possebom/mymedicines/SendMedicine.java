@@ -42,9 +42,7 @@ public class SendMedicine extends AsyncTask<Void, Void, Void> {
 
 	@Override
 	protected Void doInBackground(Void... arg0) {
-		MedicineDao md = new MedicineDao(context);
-		md.insert(medicine);
-
+		MedicineDao.getInstance(context).insert(medicine);
 		if(medicine.getBarcode().trim().length() > 0){
 			sendData(medicine);
 		}

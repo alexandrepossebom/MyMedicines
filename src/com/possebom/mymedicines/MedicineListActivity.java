@@ -3,7 +3,6 @@ package com.possebom.mymedicines;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -11,15 +10,14 @@ import android.view.MenuItem;
 import com.possebom.mymedicines.dao.MedicineDao;
 
 import de.keyboardsurfer.android.widget.crouton.Crouton;
-import de.keyboardsurfer.android.widget.crouton.Style;
 
 
 public class MedicineListActivity extends FragmentActivity implements MedicineListFragment.Callbacks {
 
-    public static final String TAG = "MEDICINE";
-    private boolean	mTwoPane;
+	public static final String TAG = "MEDICINE";
+	private boolean	mTwoPane;
 	private Menu	menu;
-	private int	id;
+	private long	id;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,16 +26,16 @@ public class MedicineListActivity extends FragmentActivity implements MedicineLi
 
 		if (findViewById(R.id.medicine_detail_container) != null) {
 			mTwoPane = true;
-			((MedicineListFragment) getSupportFragmentManager().findFragmentById(R.id.medicine_list)).setActivateOnItemClick(true);
+//			((MedicineListFragment) getSupportFragmentManager().findFragmentById(R.id.medicine_list)).setActivateOnItemClick(true);
 		}
 	}
 
 	@Override
-	public void onItemSelected(int id) {
+	public void onItemSelected(long id) {
 		this.id = id;
 		if (mTwoPane) {
 			Bundle arguments = new Bundle();
-			arguments.putInt(MedicineDetailFragment.ARG_ITEM_ID, id);
+			arguments.putLong(MedicineDetailFragment.ARG_ITEM_ID, id);
 			MedicineDetailFragment fragment = new MedicineDetailFragment();
 			fragment.setArguments(arguments);
 			getSupportFragmentManager().beginTransaction().replace(R.id.medicine_detail_container, fragment).commit();
@@ -50,49 +48,50 @@ public class MedicineListActivity extends FragmentActivity implements MedicineLi
 			startActivity(detailIntent);
 		}
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		this.menu = menu;
-	    MenuInflater inflater = getMenuInflater();
-	    inflater.inflate(R.menu.main, menu);
-	    return true;
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.main, menu);
+		return true;
 	}
 
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if(resultCode == RESULT_OK)
-//            Crouton.makeText(this,R.string.item_added, Style.INFO).show();
-//        else
-//            Crouton.makeText(this,R.string.item_not_added, Style.CONFIRM).show();
-//    }
-//
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        Crouton.cancelAllCroutons();
-//    }
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		boolean result = false;
+		if(resultCode == RESULT_OK)
+			result = true;
 
-    @Override
+		((MedicineListFragment) getSupportFragmentManager().findFragmentById(R.id.medicine_list)).onNewItem(result);
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		Crouton.cancelAllCroutons();
+	}
+
+	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		 switch (item.getItemId()) {
-	        case R.id.menu_add :
-	            Intent intent = new Intent(this, MedicineAddActivity.class);
-	            startActivityForResult(intent, 0);
-	            return true;
-	        case R.id.menu_delete:
-	        	MedicineDao md = new MedicineDao(getApplicationContext());
-	        	md.deleteById(id);
-	        	getSupportFragmentManager().findFragmentById(R.id.medicine_list).onResume();
-	        	onItemSelected(0);
-	        	if (menu != null) {
-					menu.findItem(R.id.menu_delete).setVisible(false);
-				}
-	        default:
-	            return super.onOptionsItemSelected(item);
-	    }
+		switch (item.getItemId()) {
+		case R.id.menu_add :
+			Intent intent = new Intent(this, MedicineAddActivity.class);
+			startActivityForResult(intent, 0);
+			return true;
+		case R.id.menu_delete:
+			MedicineDao.getInstance(getApplicationContext()).deleteById(id);
+			getSupportFragmentManager().findFragmentById(R.id.medicine_list).onResume();
+			onItemSelected(0);
+			if (menu != null) {
+				menu.findItem(R.id.menu_delete).setVisible(false);
+			}
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
-	
+
 }

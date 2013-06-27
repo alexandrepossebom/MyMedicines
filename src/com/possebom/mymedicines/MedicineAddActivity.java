@@ -12,7 +12,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.renderscript.Font;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,6 +24,7 @@ import android.widget.EditText;
 import com.possebom.mymedicines.GetMedicine.GetMedicineListener;
 import com.possebom.mymedicines.SendMedicine.SetMedicineListener;
 import com.possebom.mymedicines.model.Medicine;
+
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 

@@ -7,13 +7,14 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.possebom.mymedicines.model.Medicine;
+import com.possebom.mymedicines.util.Utils;
 
-public class MedicineDao {
+public final class MedicineDao {
+	private static MedicineDao sInstance = null;
 	private SQLiteDatabase db;
-	private SQLiteHelper dbHelper; 
+	private final SQLiteHelper dbHelper; 
 
 	private static final String TABLE = "medicine";
 	private static final String SCRIPT_DB_DELETE = "DROP TABLE IF EXISTS medicine";
@@ -27,8 +28,16 @@ public class MedicineDao {
 					"month integer,"+
 					"year integer);";
 
-	public MedicineDao(Context ctx) {
+	private MedicineDao(final Context ctx) {
 		dbHelper = new SQLiteHelper(ctx,TABLE, 1,SCRIPT_DB_CREATE, SCRIPT_DB_DELETE);
+	}
+	
+	public synchronized static MedicineDao getInstance(Context context){
+		if (sInstance == null){
+			Utils.log("MedicineDao is null");
+			sInstance = new MedicineDao(context.getApplicationContext());
+		}
+		return sInstance;
 	}
 
 	public void insert(Medicine m){
@@ -58,7 +67,7 @@ public class MedicineDao {
 		return medicine;
 	}
 
-	public Medicine getMedicineById(int id){
+	public Medicine getMedicineById(long id){
 		String[] columns = new String[]{"_id", "brandName", "drug", "laboratory", "concentration", "form", "month", "year"};
 		String[] args = new String[]{String.valueOf(id)};
 		db = dbHelper.getWritableDatabase();
@@ -87,10 +96,11 @@ public class MedicineDao {
 		return list;
 	}
 
-	public int deleteById(int id){
+	public int deleteById(long id){
 		db = dbHelper.getWritableDatabase();
 		int rows = db.delete(TABLE, "_id = ?", new String[]{ String.valueOf(id) });
 		db.close();
+		Utils.log("Deleted item id : "+id + " rows affected : "+ rows);
 		return rows;
 	}
 }

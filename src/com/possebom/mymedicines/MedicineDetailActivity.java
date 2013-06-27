@@ -9,8 +9,7 @@ import android.view.MenuItem;
 import com.possebom.mymedicines.dao.MedicineDao;
 
 public class MedicineDetailActivity extends FragmentActivity {
-
-	private int	id;
+	private long	id;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -21,8 +20,8 @@ public class MedicineDetailActivity extends FragmentActivity {
 
 		if (savedInstanceState == null) {
 			Bundle arguments = new Bundle();
-			id = getIntent().getIntExtra(MedicineDetailFragment.ARG_ITEM_ID,0);
-			arguments.putInt(MedicineDetailFragment.ARG_ITEM_ID, id);
+			id = getIntent().getLongExtra(MedicineDetailFragment.ARG_ITEM_ID,0);
+			arguments.putLong(MedicineDetailFragment.ARG_ITEM_ID, id);
 			MedicineDetailFragment fragment = new MedicineDetailFragment();
 			fragment.setArguments(arguments);
 			getSupportFragmentManager().beginTransaction().add(R.id.medicine_detail_container, fragment).commit();
@@ -43,8 +42,7 @@ public class MedicineDetailActivity extends FragmentActivity {
 			finish();
 			return true;
 		case R.id.menu_delete:
-			MedicineDao md = new MedicineDao(getApplicationContext());
-        	md.deleteById(id);
+			MedicineDao.getInstance(getApplicationContext()).deleteById(id);
         	finish();
 			return true;
 		}

@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class Medicine {
-	private int id;
+	private long id;
 	private String brandName;
 	private String drug;
 	private String laboratory;
@@ -41,10 +41,10 @@ public class Medicine {
 	public void setYear(int year) {
 		this.year = year;
 	}
-	public int getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getBrandName() {
