@@ -15,21 +15,22 @@ import com.possebom.mymedicines.model.Medicine;
 
 public class GetMedicine extends AsyncTask<Void, Void, Void> {
 	private static final String	TAG	= "MEDICINE";
-	private String barcode;
+	private final String barcode;
 	private JSONObject json;
-	private String country;
-	private GetMedicineListener listener;
+	private final String country;
+	private final GetMedicineListener listener;
 
-	public GetMedicine(GetMedicineListener listener, String barcode, String country) {
+	public GetMedicine(final GetMedicineListener listener, final String barcode, final String country) {
+		super();
 		this.barcode = barcode;
 		this.country = country;
 		this.listener = listener;
 	}
 
 	@Override
-	protected void onPostExecute(Void result) {
+	protected void onPostExecute(final Void result) {
 		super.onPostExecute(result);
-		Medicine medicine = new Medicine();
+		final Medicine medicine = new Medicine();
 		if(json != null){
 			try {
 				medicine.setBrandName(json.getString("brandName"));
@@ -48,18 +49,17 @@ public class GetMedicine extends AsyncTask<Void, Void, Void> {
 	}
 
 	@Override
-	protected Void doInBackground(Void... arg0) {
-		HttpClient httpclient = new DefaultHttpClient();
-		ResponseHandler<String> handler = new BasicResponseHandler();
-		HttpGet request = new HttpGet("http://possebom.com/android/mymedicines/getMedicine.php?country="+country+"&barcode="+barcode);
+	protected Void doInBackground(final Void... arg0) {
+		final HttpClient httpclient = new DefaultHttpClient();
+		final ResponseHandler<String> handler = new BasicResponseHandler();
+		final HttpGet request = new HttpGet("http://possebom.com/android/mymedicines/getMedicine.php?country="+country+"&barcode="+barcode);
         String result = null;
 		try {
 			result = new String(httpclient.execute(request, handler).getBytes("ISO-8859-1"),"UTF-8");
-			JSONArray jsonArray = new JSONArray(result);
+			final JSONArray jsonArray = new JSONArray(result);
 			json = jsonArray.getJSONObject(0);
 			httpclient.getConnectionManager().shutdown();
 		} catch (Exception e) {
-			json = null;
             Log.e(TAG, "Request URL : " + request.getURI().toString());
 			Log.e(TAG, "Error converting result " + e.toString() + " JSON : " + result);
 		}

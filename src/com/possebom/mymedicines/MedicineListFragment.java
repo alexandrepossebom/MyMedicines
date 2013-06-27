@@ -26,9 +26,12 @@ public class MedicineListFragment extends ListFragment implements RemoveListener
 	}
 
 	private static Callbacks	sDummyCallbacks	= new Callbacks() {
+
 		@Override
 		public void onItemSelected(long id) {
+			
 		}
+		
 	};
 
 	private ListAdapter	adapter;
@@ -36,12 +39,7 @@ public class MedicineListFragment extends ListFragment implements RemoveListener
 	private SwipeListView listview;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-	}
-
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstance) {
 		listview = (SwipeListView) inflater.inflate(R.layout.list_root, container, false);
 
 		list = MedicineDao.getInstance(getActivity()).getAll();
@@ -50,7 +48,7 @@ public class MedicineListFragment extends ListFragment implements RemoveListener
 
 		listview.setSwipeListViewListener( new BaseSwipeListViewListener(){
 			@Override
-			public void onClickFrontView(int position) {
+			public void onClickFrontView(final int position) {
 				mCallbacks.onItemSelected(adapter.getItemId(position));
 			}
 		});
@@ -59,12 +57,7 @@ public class MedicineListFragment extends ListFragment implements RemoveListener
 	}
 
 	@Override
-	public void onResume() {
-		super.onResume();
-	}
-
-	@Override
-	public void onAttach(Activity activity) {
+	public void onAttach(final Activity activity) {
 		super.onAttach(activity);
 
 		if (!(activity instanceof Callbacks)) {
@@ -80,19 +73,20 @@ public class MedicineListFragment extends ListFragment implements RemoveListener
 		mCallbacks = sDummyCallbacks;
 	}
 
-	public void onNewItem(boolean result) {
+	public void onNewItem(final boolean result) {
 		if(result){
 			adapter.clear();
 			list = MedicineDao.getInstance(getActivity()).getAll();
 			adapter.addAll(list);
 			adapter.notifyDataSetChanged();
 			Crouton.makeText(getActivity(),R.string.item_added, Style.INFO).show();
-		}else
+		}else{
 			Crouton.makeText(getActivity(),R.string.item_not_added, Style.CONFIRM).show();
+		}
 	}
 
 	@Override
-	public void removeMedicine(Medicine medicine) {
+	public void removeMedicine(final Medicine medicine) {
 		adapter.remove(medicine);
 		MedicineDao.getInstance(getActivity()).deleteById(medicine.getId());
 		list.remove(medicine);
