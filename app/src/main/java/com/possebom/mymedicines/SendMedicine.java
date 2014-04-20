@@ -51,10 +51,10 @@ public class SendMedicine extends AsyncTask<Void, Void, Void> {
 
 	private void sendData(Medicine medicine){
 		HttpClient httpclient = new DefaultHttpClient();
-		HttpPost httppost = new HttpPost("http://possebom.com/android/mymedicines/addMedicine.php");
+		HttpPost httppost = new HttpPost("http://possebom.com/medicine/api/medicine/");
 		try {
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-			nameValuePairs.add(new BasicNameValuePair("brandName", medicine.getBrandName()));
+			nameValuePairs.add(new BasicNameValuePair("brand", medicine.getBrandName()));
 			nameValuePairs.add(new BasicNameValuePair("drug", medicine.getDrug()));
 			nameValuePairs.add(new BasicNameValuePair("laboratory", medicine.getLaboratory()));
 			nameValuePairs.add(new BasicNameValuePair("concentration", medicine.getConcentration()));

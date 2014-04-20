@@ -9,8 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.fortysevendeg.android.swipelistview.BaseSwipeListViewListener;
-import com.fortysevendeg.android.swipelistview.SwipeListView;
+import com.fortysevendeg.swipelistview.BaseSwipeListViewListener;
+import com.fortysevendeg.swipelistview.SwipeListView;
 import com.possebom.mymedicines.dao.MedicineDao;
 import com.possebom.mymedicines.model.Medicine;
 

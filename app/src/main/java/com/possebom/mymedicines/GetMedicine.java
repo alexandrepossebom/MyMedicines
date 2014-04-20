@@ -33,7 +33,7 @@ public class GetMedicine extends AsyncTask<Void, Void, Void> {
 		final Medicine medicine = new Medicine();
 		if(json != null){
 			try {
-				medicine.setBrandName(json.getString("brandName"));
+				medicine.setBrandName(json.getString("brand"));
 				medicine.setDrug(json.getString("drug"));
 				medicine.setConcentration(json.getString("concentration"));
 				medicine.setForm(json.getString("form"));
@@ -52,12 +52,11 @@ public class GetMedicine extends AsyncTask<Void, Void, Void> {
 	protected Void doInBackground(final Void... arg0) {
 		final HttpClient httpclient = new DefaultHttpClient();
 		final ResponseHandler<String> handler = new BasicResponseHandler();
-		final HttpGet request = new HttpGet("http://possebom.com/android/mymedicines/getMedicine.php?country="+country+"&barcode="+barcode);
+        final HttpGet request = new HttpGet("http://possebom.com/medicine/api/medicine/"+barcode+"/"+country);
         String result = null;
 		try {
 			result = new String(httpclient.execute(request, handler).getBytes("ISO-8859-1"),"UTF-8");
-			final JSONArray jsonArray = new JSONArray(result);
-			json = jsonArray.getJSONObject(0);
+            json = new JSONObject(result);
 			httpclient.getConnectionManager().shutdown();
 		} catch (Exception e) {
             Log.e(TAG, "Request URL : " + request.getURI().toString());
